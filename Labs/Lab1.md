@@ -21,20 +21,76 @@ You will be able to complete the following tasks:
 
 ## Task 1: Fabric Deployment
 
-1. Navigate to (Fabric Workspace)
-1. Click on Data Engineering experience
-1. Click on Workspaces from left Navigation
-1. Click on + New Workspace
-1. Provide Name of Workspace
-1. Provide Description of Workspace (optional)
-1. Click Apply
+1. Navigate to [(Fabric Workspace)](https://app.fabric.microsoft.com/)
+In this task, you will create a new workspace in Microsoft Fabric to organize and manage your data and analytics assets. The workspace will be linked to a Copilot-enabled capacity, providing access to AI-powered features such as natural language queries and intelligent data insights.
+
+1. Now let's create a workspace with a Fabric license. Select **Workspaces** **(1)** from the left navigation bar.
+
+1. Click **+ New workspace (2)** found at the bottom of the pop-out menu.
+
+    ![](../Images/fabric-image4.png)
+
+1. The **Create a workspace** dialog opens on the right side of the browser.
+
+1. Enter the name **Workspace<inject key="DeploymentID" enableCopy="false"/> (1)**, validate that the name is available, and then click **Advanced (2)**.
+
+    >**Note:** Please use the workspace name provided above.
+
+    ![](../Images/fabric-image5.png)
+
+1. Ensure **Fabric capacity (1)** is chosen, verify that **capacity<inject key="DeploymentID" enableCopy="false"/> - <inject key="Region" enableCopy="false"/> (2)** is selected under **Capacity**, and then click **Apply (3)**.
+
+    ![](../Images/fabric-image6.png)
+
+    >**Note:** Close any pop-up that appears on the screen.
+
+    ![](../Images/fabric-image7.png)
+
 1. Retrieve Workspace ID from URL for future steps.
 
-1. The easiest way to find your workspace ID is in the URL of the Fabric site for an item in a workspace. As in Power BI, the Fabric URL contains the workspace ID, which is the unique identifier after /groups/ in the URL, for example: https://powerbi.com/groups/11aa111-a11a-1111-1abc-aa1111aaaa/.... Alternatively, you can find the workspace ID in the Power BI Admin portal settings by selecting Details next to the workspace name.
+1. The easiest way to find your workspace ID is in the URL of the Fabric site for an item in a workspace. The Fabric URL contains the workspace ID, which is the unique identifier after **/groups/** in the URL, for example: https://app.fabric.microsoft.com/groups/**11aa111-a11a-1111-1abc-aa1111aaaa**/list?experience=fabric-developer.
 
 ## Task 2: Deploy Azure infrastructure via the provided Bicep templates
 
 ### GitHub Codespaces
+
+1. In a new browser tab, go to `https://www.github.com/login`.
+
+1. Navigate to the **Environment (1)** tab in the lab environment and click on the **Licenses (2)** button. Copy the **GitHub UserEmail (3)** and **GitHub Password (4)**, then save these credentials in **Notepad**. You will need them later during the GitHub login and device verification steps.
+
+   ![](../Images/ex-1-4.png)
+
+1. Open a **Private window** in Microsoft Edge by clicking the three-dot menu **(1)** in the top-right and selecting **New InPrivate window (2)**.
+
+   ![](../Images/ex-1-5.png)
+
+1. In the new InPrivate window, go to `http://outlook.office.com/`.
+
+   ![](../Images/ex-1-6.png)
+
+1. Enter your **GitHub Username (1)** (as saved in Notepad) and click **Next (2)** to proceed.
+
+   ![](../Images/ex-1-7.png)
+
+1. Enter your **GitHub Password (1)** (as saved in Notepad) and click **Sign in (2)**.
+
+   ![](../Images/ex-1-8.png)
+
+1. If you see the pop-up **Stay Signed in?**, select **No**.
+
+   ![](../Images/ex-1-9.png)
+
+1. Check your email inbox and copy the **Verification code** sent by GitHub.
+
+   ![](../Images/ex-1-10.png)
+   
+1. On the **Device verification** pane, enter the **Device Verification Code (1)** that was emailed to you and click **Verify (2)**.
+
+   ![](../Images/ex_1_g_3.png)
+   
+   > **Note:** If you see **Two-factor authentication (2FA) is required for your GitHub account** page next, click on **Remind me tomorrow**
+   
+      ![The `New Repository` creation form in GitHub.](../Images/2fagit.png "New Repository Creation Form")
 
 You can run this solution using GitHub Codespaces. The button will open a web-based VS Code instance in your browser:
 

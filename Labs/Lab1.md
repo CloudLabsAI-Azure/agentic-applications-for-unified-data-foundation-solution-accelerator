@@ -19,62 +19,103 @@ You will be able to complete the following tasks:
 - Task 3: Set up Azure OpenAI, Container Registry, Azure Container Apps and validate deployment via portal and CLI
 
 
-## Task 1: Fabric Deployment
+## Task 1: Create a workspace and link with Fabric Copilot-enabled capacity
 
-1. Navigate to [(Fabric Workspace)](https://app.fabric.microsoft.com/)
 In this task, you will create a new workspace in Microsoft Fabric to organize and manage your data and analytics assets. The workspace will be linked to a Copilot-enabled capacity, providing access to AI-powered features such as natural language queries and intelligent data insights.
 
-1. Now let's create a workspace with a Fabric license. Select **Workspaces** **(1)** from the left navigation bar.
+1. On the Lab VM, open **Microsoft Edge** from the desktop. In a new tab, navigate to **Microsoft Fabric** by copying and pasting the following URL into the address bar:
 
-1. Click **+ New workspace (2)** found at the bottom of the pop-out menu.
+   ```
+   https://app.fabric.microsoft.com/home
+   ```
 
-    ![](../Images/fabric-image4.png)
+2. On the **Enter your email, we'll check if you need to create a new account** tab, you will see the login screen, in that enter the following **email/username (1)**, and click on **Submit (2)**.
+ 
+   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
+ 
+     ![](../Images/lab1-1.png)
+ 
+3. Now enter the following **password (1)** and click on **Sign in (2)**.
+ 
+   - **Password:** <inject key="AzureAdUserPassword"></inject>
+ 
+     ![](../Images/lab1-2.png)
+     
+1. If you see the pop-up **Stay Signed in?**, select **Yes**.
+
+   ![](../Images/lab1-3.png)
+
+1. On **Welcome to the Fabric view** dialog opens, click **Cancel**.
+
+   ![](../Images/lab1-92.png)
+
+1. On **Microsoft Fabric (Free) license assigned** dialog appears, click **OK** to proceed.
+
+   ![](../Images/lab1-95.png)
+
+1. You will be navigated to the **Microsoft** **Fabric Home page**.
+
+   ![tour](../Images/lab1-93.png)
+
+   >**Note:** If you receive any pop-ups, please **Close** them.
+
+   ![tour](../Images/lab1-94.png)
+
+1. Now, let's create a workspace with a Fabric license. Select **Workspaces** **(1)** from the left navigation bar. Click **+ New workspace (2)** found at the bottom of the pop-out menu.
+
+    ![](../Images/lab1-96.png)
 
 1. The **Create a workspace** dialog opens on the right side of the browser.
 
-1. Enter the name **Workspace<inject key="DeploymentID" enableCopy="false"/> (1)**, validate that the name is available, and then click **Advanced (2)**.
+1. Enter the name **fabric<inject key="DeploymentID" enableCopy="false"/> (1)**, validate that the name is available, and then click **Advanced (2)**.
 
     >**Note:** Please use the workspace name provided above.
 
-    ![](../Images/fabric-image5.png)
+    ![](../Images/lab1-5.png)
 
 1. Ensure **Fabric capacity (1)** is chosen, verify that **capacity<inject key="DeploymentID" enableCopy="false"/> - <inject key="Region" enableCopy="false"/> (2)** is selected under **Capacity**, and then click **Apply (3)**.
 
-    ![](../Images/fabric-image6.png)
+    ![](../Images/lab1-6.png)
 
     >**Note:** Close any pop-up that appears on the screen.
 
-    ![](../Images/fabric-image7.png)
+    ![](../Images/lab1-7.png)
 
 1. Retrieve Workspace ID from URL for future steps.
 
 1. The easiest way to find your workspace ID is in the URL of the Fabric site for an item in a workspace. The Fabric URL contains the workspace ID, which is the unique identifier after **/groups/** in the URL, for example: https://app.fabric.microsoft.com/groups/**11aa111-a11a-1111-1abc-aa1111aaaa**/list?experience=fabric-developer.
 
-## Task 2: Deploy Azure infrastructure via the provided Bicep templates
+    ![](../Images/lab1-8.png)
 
-### GitHub Codespaces
+1. Copy the **Workspace ID** from the link and keep it in notepad for future reference.
 
-1. In a new browser tab, go to `https://www.github.com/login`.
+## Task 2: Login to GitHub
 
 1. Navigate to the **Environment (1)** tab in the lab environment and click on the **Licenses (2)** button. Copy the **GitHub UserEmail (3)** and **GitHub Password (4)**, then save these credentials in **Notepad**. You will need them later during the GitHub login and device verification steps.
 
-   ![](../Images/ex-1-4.png)
+   ![](../Images/lab1-99.png)
 
 1. Open a **Private window** in Microsoft Edge by clicking the three-dot menu **(1)** in the top-right and selecting **New InPrivate window (2)**.
 
-   ![](../Images/ex-1-5.png)
+   ![](../Images/lab1-97.png)
 
-1. In the new InPrivate window, go to `http://outlook.office.com/`.
+1. In a new browser tab, go to `https://www.github.com/login`.
 
-   ![](../Images/ex-1-6.png)
+1. Enter your **GitHub Username (1)** and **GitHub Password (1)** (as saved in Notepad) and click **Sign in (2)** to proceed.
+
+   ![](../Images/lab1-9.png)
+
+1. Open a new tab in InPrivate window, then go to `http://outlook.office.com/`.
+
+   ![](../Images/lab1-98.png)
 
 1. Enter your **GitHub Username (1)** (as saved in Notepad) and click **Next (2)** to proceed.
 
-   ![](../Images/ex-1-7.png)
+   ![](../Images/lab1-10.png)
 
 1. Enter your **GitHub Password (1)** (as saved in Notepad) and click **Sign in (2)**.
 
-   ![](../Images/ex-1-8.png)
+   ![](../Images/lab1-11.png)
 
 1. If you see the pop-up **Stay Signed in?**, select **No**.
 
@@ -82,23 +123,26 @@ In this task, you will create a new workspace in Microsoft Fabric to organize an
 
 1. Check your email inbox and copy the **Verification code** sent by GitHub.
 
-   ![](../Images/ex-1-10.png)
+   ![](../Images/lab1-12.png)
    
 1. On the **Device verification** pane, enter the **Device Verification Code (1)** that was emailed to you and click **Verify (2)**.
 
-   ![](../Images/ex_1_g_3.png)
+   ![](../Images/lab1-13.png)
    
    > **Note:** If you see **Two-factor authentication (2FA) is required for your GitHub account** page next, click on **Remind me tomorrow**
    
-      ![The `New Repository` creation form in GitHub.](../Images/2fagit.png "New Repository Creation Form")
+      ![The `New Repository` creation form in GitHub.](../Images/lab1-100.png "New Repository Creation Form")
+
+## Task 3: Deploy Azure infrastructure via the provided Bicep templates
 
 You can run this solution using GitHub Codespaces. The button will open a web-based VS Code instance in your browser:
 
-1. Open the solution accelerator by copying the below link into edge browser:
+1. Open the solution accelerator by copying the below link into new tab of edge browser:
 
     [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/CloudLabsAI-Azure/agentic-applications-for-unified-data-foundation-solution-accelerator)
 
 1. Accept the default values on the create Codespaces page, choose **Create codespace**.
+
 1. It would take 2-5 minutes for codespace to get ready.
 
 ### Deploying with AZD

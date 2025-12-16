@@ -1,4 +1,4 @@
-# Lab 01: Deployment & Environment Setup
+# Lab 01: Building and Deploying a Fabric-Integrated AI Application on Azure
 
 ## Estimated Duration: 120 Minutes
 
@@ -14,9 +14,10 @@ In this lab, you will explore
 
 You will be able to complete the following tasks:
 
-- Task 1: Fabric Deployment
+- Task 1: Create a fabric workspace and link with Fabric Copilot-enabled capacity
 - Task 2: Deploy Azure infrastructure via the provided Bicep templates
-- Task 3: Set up Azure OpenAI, Container Registry, Azure Container Apps and validate deployment via portal and CLI
+- Task 3: Set Up Authentication in Azure App Service
+- Task 4: Testing the application
 
 
 ## Task 1: Create a workspace and link with Fabric Copilot-enabled capacity
@@ -61,6 +62,16 @@ In this task, you will create a new workspace in Microsoft Fabric to organize an
 
    ![tour](../Images/lab1-94.png)
 
+1. Select the gear icon in the top-right corner, then choose the Admin Portal. 
+
+1. In the **Admin Portal**, select **Tenant settings** from the left-hand navigation pane. 
+
+1. For the **Users can use Copilot and other features powered by Azure OpenAI** option, **Enable** it if not enabled and **save**.
+
+1. For the **Data sent to Azure OpenAI can be processed outside your capacity's geographic region, compliance boundary, or national cloud instance** option, **Enable** it if not enabled and **save**.
+
+1. For the **Users can create and share Data agent item types (preview)** option, **Enable** it if not enabled and **save**.
+
 1. Now, let's create a workspace with a Fabric license. Select **Workspaces** **(1)** from the left navigation bar. Click **+ New workspace (2)** found at the bottom of the pop-out menu.
 
     ![](../Images/lab1-96.png)
@@ -90,7 +101,7 @@ In this task, you will create a new workspace in Microsoft Fabric to organize an
 
 1. Copy the **Workspace ID** from the link and keep it in notepad for future reference.
 
-## Task 2: Login to GitHub
+## Task 2: Deploy Azure infrastructure via the provided Bicep templates
 
 1. Navigate to the **Environment (1)** tab in the lab environment and click on the **Licenses (2)** button. Copy the **GitHub UserEmail (3)** and **GitHub Password (4)**, then save these credentials in **Notepad**. You will need them later during the GitHub login and device verification steps.
 
@@ -144,7 +155,11 @@ You can run the solution using GitHub Codespaces. The button will open a web-bas
 
 1. Accept the default values on the create Codespaces page, choose **Create codespace**.
 
+      ![The `New Repository` creation form in GitHub.](../Images/lab1-14.png "New Repository Creation Form")
+
 1. It would take 2-5 minutes for codespace to get ready.
+
+      ![The `New Repository` creation form in GitHub.](../Images/lab1-15.png "New Repository Creation Form")
 
 ### Deploying with AZD
 
@@ -155,21 +170,30 @@ Once you've opened the project in [Codespaces](#github-codespaces) you can deplo
     ```shell
     azd auth login
     ```
+
 1. You will see Start by copying the next code: xxxxx, copy the code for you then select **Enter**.
+
+      ![The `New Repository` creation form in GitHub.](../Images/lab1-16.png "New Repository Creation Form")
 
 1. A new window **Enter code to allow access** will open in the browser, provide the code copied in the previous step and choose **Next**.
 
-1. Select the ODL user used to login into azure. If not logged into azure yet, use the following credentials to login in.
 
-1. You'll see the **Sign into Microsoft Azure** tab. Here, enter your credentials:
+      ![The `New Repository` creation form in GitHub.](../Images/lab1-29.png "New Repository Creation Form")
 
-   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
+1. Select the ODL user used to login into azure.
 
-     ![](../Images/signin.png)
+      ![The `New Repository` creation form in GitHub.](../Images/lab1-30.png "New Repository Creation Form")
 
-   - **Temporary Access Pass:** <inject key="AzureAdUserPassword"></inject>
+    > **Note:** If you are not logged into azure yet or using private window, use the following credentials to login in.
+   - You'll see the **Sign into Microsoft Azure** tab. Here, enter your credentials:
 
-     ![](../Images/TAP.png)
+      - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
+
+         ![](../Images/signin.png)
+
+      - **Temporary Access Pass:** <inject key="AzureAdUserPassword"></inject>
+
+         ![](../Images/TAP.png)
 
 1. You will see the pop up window, **Are you trying to sign in to Microsoft Azure CLI?**, choose **Continue**.
 
@@ -191,8 +215,6 @@ Once you've opened the project in [Codespaces](#github-codespaces) you can deplo
 
 1. Provide an `azd` environment name as **fabricapp**.
 
-     ![](../Images/TAP.png)
-
 1. You will see the subscription available for you, **type 1** choose **Enter** to select the default subscription.
 
 1. Now, you will see the list of locations, use the up/down arrow button to navigate to **Australia East** as location, press **Enter** to select it.
@@ -211,23 +233,45 @@ Once you've opened the project in [Codespaces](#github-codespaces) you can deplo
      ![](../Images/lab1-25.png)
 
 1. This deployment can take upto *7-10 minutes* to provision the resources in your account and set up the solution with sample data.
-   
+
+     ![](../Images/lab1-26.png)
+
     > **Note:** If you encounter an error or timeout during deployment, changing the location may help, as there could be availability constraints for the resources.
     Here are some example regions where the services are available: **East US, East US2, Australia East, UK South, France Central.**
 
 1. Once the deployment has completed successfully,
-- Copy the **Web app URL (1)** and keep it in notepad for future refrence
-- Copy the **two bash commands (2)** from the terminal (ex. 
-`bash ./infra/scripts/agent_scripts/run_create_agents_scripts.sh` and
-`bash ./infra/scripts/fabric_sripts/run_fabric_items_scripts.sh <fabric-workspaceId>`) for later use.
+   - Copy the **Web app URL (1)** and keep it in notepad for future refrence
+   - Copy the **two bash commands (2)** from the terminal (ex. 
+   `bash ./infra/scripts/agent_scripts/run_create_agents_scripts.sh` and
+   `bash ./infra/scripts/fabric_sripts/run_fabric_items_scripts.sh <fabric-workspaceId>`) for later use.
 
-     ![](../Images/lab1-28.png)
+      ![](../Images/lab1-28.png)
 
 1. Run the bash script from the output of the azd deployment. The script will look like the following:
 
     ```Shell
     bash ./infra/scripts/agent_scripts/run_create_agents_scripts.sh
     ```
+
+1. Copy the link as given in the output after running the script as mentioned below and copy the code:
+
+      ![The `New Repository` creation form in GitHub.](../Images/lab1-101.png "New Repository Creation Form")
+
+1. Provide the below link into the new browser tab as copied in previous step. A new window **Enter code to allow access** will open in the browser, provide the code copied in the previous step and choose **Next**.
+
+    ```Shell
+    https://microsoft.com/devicelogin
+    ```
+
+      ![The `New Repository` creation form in GitHub.](../Images/lab1-29.png "New Repository Creation Form")
+
+1. Select the ODL user used to login into azure.
+
+      ![The `New Repository` creation form in GitHub.](../Images/lab1-30.png "New Repository Creation Form")
+
+1. Type **1** to select the subscription and they press **Enter**.
+
+      ![](../Images/lab1-31.png)
 
 1. Run the bash script from the output of the azd deployment. Replace the **fabric-workspaceId** with your Fabric workspace Id created in the previous steps. The script will look like the following:
 
@@ -237,39 +281,39 @@ Once you've opened the project in [Codespaces](#github-codespaces) you can deplo
 
 1. Once the script has run successfully, go to the deployed resource group, find the App Service, and get the app URL from `Default domain`.
 
+      ![](../Images/lab1-33.png)
+
 ## Task 4: Set Up Authentication in Azure App Service
 
 In this task, you will configure Azure App Registrations for a front-end application.
 
 1. Search for app services in azure portal and select it.
 
+      ![](../Images/lab1-43.png)
+
 1. You will see two app services in running state. Select the app service without **cs** in the name of it.
 
-1. Click on `Authentication` from left menu under Settings.
+      ![](../Images/lab1-42.png)
 
-    ![Authentication](../Images/AppAuthentication.png)
+1. Click on `Authentication (1)` from left menu under Settings. Then, choose `Add identity provider (2)` to see a list of identity providers.
 
-2. Click on `Add identity provider` to see a list of identity providers.
+      ![](../Images/lab1-39.png)
 
-    ![Authentication Identity](../Images/AppAuthenticationIdentity.png)
+3. Click on `Identity Provider` dropdown to see a list of identity providers. Select the first option `Microsoft` from the drop-down list.
 
-3. Click on `Identity Provider` dropdown to see a list of identity providers. Select the first option `Microsoft` from the drop-down list
+4. Provide the name of App registration as  **fabric-app**. In `client secret expiration` under **App registration** choose **Recommended 180 days**. Accept the default values and click on `Add` button to go back to the previous page with the identity provider added.
 
-     ![Add Provider](../Images/AppAuthIdentityProvider.png)
-
-4. Provide the name of App registration as  **fabric-app**. In `client secret expiration` under **App registration** choose **Recommended 180 days**.
-
-    ![Add Provider](../Images/AppAuthIdentityProviderAdd.png)
-
-5. Accept the default values and click on `Add` button to go back to the previous page with the identity provider added.
-
-    ![Add Provider](../Images/AppAuthIdentityProviderAdded.png)
+      ![](../Images/lab1-40.png)
 
 6. You have successfully added app authentication, and now required to log in to access the application.
 
 1. Navigate to Overview of the app service, select the default domain to open the web app in different tab of the browser.
 
-1. You will see Permission requested tab, choose Accept to login in using the same user used to logged into Azure.
+      ![](../Images/lab1-46.png)
+
+1. You will see Permission requested tab, choose **Accept** to login in using the same user used to logged into Azure.
+
+      ![](../Images/lab1-41.png)
 
 ## Task 5: Testing the application
 

@@ -1,4 +1,5 @@
 # Lab 01: Create Fabric Data Agent and Publish to Teams
+Creating and Integrating Fabric Data Agents with Microsoft Copilot Studio
 
 ## Estimated Duration: 120 Minutes
 
@@ -22,7 +23,7 @@ You will be able to complete the following tasks:
 - [Cross-geo storing for AI](https://learn.microsoft.com/en-us/fabric/data-science/data-agent-tenant-settings) is enabled.
 
 
-## Task 1: Create a new Fabric data agent
+## Task 1: Create and Configure a Microsoft Fabric Data Agent
 
 1. To create a new Fabric data agent, first navigate to **fabric<inject key="DeploymentID" enableCopy="false"/> (1)** workspace created in previous lab, and then select the **+ New Item (2)** button. In the **All items** tab, search for **data agent (3)** to locate the appropriate option, then choose **Data agent (preview) (4)**
 

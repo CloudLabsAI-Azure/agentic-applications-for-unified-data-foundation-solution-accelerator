@@ -4,7 +4,7 @@
 
 ## Overview
 
-In this lab, you will explore 
+In this lab, you will provision a Microsoft Fabric capacity, configure tenant-level settings required for Copilot and data agents, and create a Fabric workspace linked to a Copilot-enabled capacity. You will then deploy the required Azure infrastructure using Bicep templates and Azure Developer CLI (azd), set up application authentication in Azure App Service, and validate the end-to-end solution by interacting with the deployed application to query and visualize data using natural language.
 
 ## Architecture Diagram
 
@@ -14,17 +14,57 @@ In this lab, you will explore
 
 You will be able to complete the following tasks:
 
-- Task 1: Create a fabric workspace and link with Fabric Copilot-enabled capacity
-- Task 2: Deploy Azure infrastructure via the provided Bicep templates
-- Task 3: Set Up Authentication in Azure App Service
-- Task 4: Testing the application
+- Task 1: Create a fabric capacity
+- Task 2: Create a fabric workspace and link with Fabric Copilot-enabled capacity
+- Task 3: Deploy Azure infrastructure via the provided Bicep templates
+- Task 4: Set Up Authentication in Azure App Service
+- Task 5: Testing the application
 
+## Task 1: Create a fabric capacity
 
-## Task 1: Create a workspace and link with Fabric Copilot-enabled capacity
+In this task, you will provision a Microsoft Fabric capacity by configuring the required Azure settings and assigning a Fabric administrator.
+
+1. In the search bar, type **Microsoft Fabric (1)** and select the **Microsoft Fabric (2)** option from the services.
+
+   ![](../Images/lab1-110.png)
+
+1. On **Microsoft Fabric** blade, click **+ Create**.
+
+   ![](../Images/lab1-111.png)
+
+1. In the **Create Fabric capacity** page, under **Basics** tab provide the below details and select **Review + create (9)**:
+
+    | Setting | Value |
+    | --- | --- |
+    | Subscription | **Keep it as default (1)**  |
+    | Resource Group | **Fabric (2)** |
+    | Capacity name | **capacity<inject key="DeploymentID" enableCopy="false"/>(3)** |
+    | Region | **Provide a secure password (4)** |
+    | Size | Select **Change size (5)** |
+    | Select the resource size | Select **F2 (6)** sku and choose **Select (7)** |    
+    | Fabric capacity administrator | Choose **<inject key="AzureAdUserEmail"></inject> (7)** |
+
+      ![](../Images/lab1-112.png)
+
+1. Wait for the validation process to complete. Then click on **Create**.
+
+    >**Note**: Wait for the Fabric capacity to be created. This should take about 1-2 minutes.
+
+      ![](../Images/lab1-114.png)
+
+1. On the deployment blade, click **Go to resource** to display the Fabric capacity blade.
+
+   ![](../Images/lab1-113.png)
+
+1. Verify that the status of fabric capacity is in **Active** state.
+
+   ![](../Images/lab1-115.png)
+
+## Task 2: Create a workspace and link with Fabric Copilot-enabled capacity
 
 In this task, you will create a new workspace in Microsoft Fabric to organize and manage your data and analytics assets. The workspace will be linked to a Copilot-enabled capacity, providing access to AI-powered features such as natural language queries and intelligent data insights.
 
-1. On the Lab VM, open **Microsoft Edge** from the desktop. In a new tab, navigate to **Microsoft Fabric** by copying and pasting the following URL into the address bar:
+1. In a new tab, navigate to **Microsoft Fabric** by copying and pasting the following URL into the address bar:
 
    ```
    https://app.fabric.microsoft.com/home
@@ -117,11 +157,11 @@ In this task, you will create a new workspace in Microsoft Fabric to organize an
 
 1. Copy the **Workspace ID** from the link and keep it in notepad for future reference.
 
-## Task 2: Deploy Azure infrastructure via the provided Bicep templates
+## Task 3: Deploy Azure infrastructure via the provided Bicep templates
 
-1. Navigate to the **Environment (1)** tab in the lab environment and click on the **Licenses (2)** button. Copy the **GitHub UserEmail (3)** and **GitHub Password (4)**, then save these credentials in **Notepad**. You will need them later during the GitHub login and device verification steps.
+1. Navigate to the **Environment (1)** tab in the lab environment and click on the **Licenses (2)** button. Copy the **GitHubFabric UserEmail (3)** and **GitHubFabric Password (4)**, then save these credentials in **Notepad**. You will need them later during the GitHub login and device verification steps.
 
-   ![](../Images/lab1-99.png)
+   ![](../Images/lab1-116.png)
 
 1. Open a **Private window** in Microsoft Edge by clicking the three-dot menu **(1)** in the top-right and selecting **New InPrivate window (2)**.
 
@@ -161,7 +201,7 @@ In this task, you will create a new workspace in Microsoft Fabric to organize an
    
       ![The `New Repository` creation form in GitHub.](../Images/lab1-100.png "New Repository Creation Form")
 
-## Task 3: Deploy Azure infrastructure via the provided Bicep templates
+## Task 4: Deploy Azure infrastructure via the provided Bicep templates
 
 You can run the solution using GitHub Codespaces. The button will open a web-based VS Code instance in your browser:
 
@@ -177,17 +217,13 @@ You can run the solution using GitHub Codespaces. The button will open a web-bas
 
       ![The `New Repository` creation form in GitHub.](../Images/lab1-15.png "New Repository Creation Form")
 
-### Deploying with AZD
+1. Once you've opened the project in [Codespaces](#github-codespaces) you can deploy it to Azure by following these steps:
 
-Once you've opened the project in [Codespaces](#github-codespaces) you can deploy it to Azure by following these steps:
-
-1. Login to Azure:
+1. Run the command below to log in to Azure. When the message **Start by copying the next code** appears, copy the provided code and press **Enter**.:
 
     ```shell
     azd auth login
     ```
-
-1. You will see Start by copying the next code: xxxxx, copy the code for you then select **Enter**.
 
       ![The `New Repository` creation form in GitHub.](../Images/lab1-16.png "New Repository Creation Form")
 
@@ -222,7 +258,7 @@ Once you've opened the project in [Codespaces](#github-codespaces) you can deplo
 
      ![](../Images/lab1-21.png)
 
-1. Provision and deploy all the resources:
+1. Execute the following command to provision and deploy the required resources.
 
     ```shell
     azd up
@@ -247,7 +283,7 @@ Once you've opened the project in [Codespaces](#github-codespaces) you can deplo
 
      ![](../Images/lab1-25.png)
 
-1. This deployment can take upto *7-10 minutes* to provision the resources in your account and set up the solution with sample data.
+1. This deployment can take upto **7-10 minutes** to provision the resources in your account and set up the solution with sample data.
 
      ![](../Images/lab1-26.png)
 
@@ -298,7 +334,7 @@ Once you've opened the project in [Codespaces](#github-codespaces) you can deplo
 
       ![](../Images/lab1-33.png)
 
-## Task 4: Set Up Authentication in Azure App Service
+## Task 5: Set Up Authentication in Azure App Service
 
 In this task, you will configure Azure App Registrations for a front-end application.
 
@@ -350,9 +386,13 @@ These questions serve as a great starting point to explore insights from the dat
 
 ## Summary
 
-In this exercise, you:
+In this lab, you have completed:
 
-
+- Created a fabric capacity
+- Created a fabric workspace and link with Fabric Copilot-enabled capacity
+- Deployed Azure infrastructure via the provided Bicep templates
+- Set Up Authentication in Azure App Service
+- Tested the application
 
 ## You have successfully completed the exercise. Click on Next >> to proceed with the next exercise.
 

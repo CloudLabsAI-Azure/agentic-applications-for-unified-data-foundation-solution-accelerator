@@ -1,11 +1,12 @@
-# Lab 01: Create Fabric Data Agent and Publish to Teams
+# Lab 02: Creating Fabric Data Agent and Publish to Teams
+
 Creating and Integrating Fabric Data Agents with Microsoft Copilot Studio
 
 ## Estimated Duration: 120 Minutes
 
 ## Overview
 
-In this lab, you will explore 
+In this lab, you will create and configure a Microsoft Fabric Data Agent connected to a Lakehouse to enable natural language querying over structured data. You will then build a custom AI agent in Microsoft Copilot Studio, integrate it with the Fabric data agent, configure authentication and orchestration settings, and publish the agent for use in Microsoft Teams, allowing users to ask business questions and receive data-driven responses.
 
 ## Architecture Diagram
 
@@ -14,6 +15,9 @@ In this lab, you will explore
 ## Lab Objectives
 
 You will be able to complete the following tasks:
+
+- Task 1: Create and Configure a Microsoft Fabric Data Agent
+- Task 2: Create a new Copilot Studio agent
 
 ## Pre-requisites
 - A [paid F2 or higher Fabric capacity](https://learn.microsoft.com/en-us/fabric/enterprise/fabric-features#features-parity-list)  , or a [Power BI Premium per capacity (P1 or higher)](https://learn.microsoft.com/en-us/fabric/enterprise/licenses#workspace) capacity with Microsoft Fabric enabled
@@ -129,15 +133,16 @@ You will be able to complete the following tasks:
 
 
 ## Sample Questions 
-1. Total number of customers
 
+1. Total number of customers
 
 2. Total number of orders in the last 6 months by region
 
 ## Summary
 
-In this exercise, you:
+In this lab, you have completed:
 
-
+- Created and Configure a Microsoft Fabric Data Agent
+- Created a new Copilot Studio agent
 
 ## You have successfully completed the exercise.

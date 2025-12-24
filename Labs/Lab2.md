@@ -117,9 +117,7 @@ In this task, you will create a custom AI agent in Microsoft Copilot Studio, con
 
     ![quota-check-output](../Images/lab2-17.png)
 
-1. If there's already a connection between Microsoft Fabric and the custom AI agent, you can select Next and move to next step. Otherwise, select the dropdown and select Create new connection to establish a connection between Microsoft Fabric and Copilot Studio.
-
-    ![microsoft-copilot-studio-connector](../Images/microsoft-copilot-studio-connector.png)
+    > **Note:** If there's already a connection between Microsoft Fabric and the custom AI agent, you can select **Next** and move to next step.
 
 1. From the available list of Fabric data agents you have access to, select the data agent you want to connect to the custom AI agent in Copilot Studio. For this lab, choose **fabric-agent (1)** that you created earlier, then select **Next (2)**. The selected data agent will work in conjunction with the custom AI agent to support and execute the required workflows.
 

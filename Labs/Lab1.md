@@ -38,7 +38,7 @@ In this task, you will provision a Microsoft Fabric capacity by configuring the 
     | Region | **Provide a secure password (4)** |
     | Size | Select **Change size (5)** |
     | Select the resource size | Select **F2 (6)** sku and choose **Select (7)** |    
-    | Fabric capacity administrator | Choose **<inject key="AzureAdUserEmail"></inject> (7)** |
+    | Fabric capacity administrator | Choose **<inject key="AzureAdUserEmail"></inject> (8)** |
 
       ![](../Images/lab1-112.png)
 

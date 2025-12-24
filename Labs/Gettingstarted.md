@@ -10,9 +10,13 @@ By the end of the workshop, you will gain a clear understanding of how structure
 
 ## Objectives
 
-- **Lab 01: Deployment & Environment Setup:** In this hands-on lab, participants will Deploy the Unified Data Foundation solution accelerator resources, understand architecture components, and explore Microsoft Fabric, AI services, and container apps deployed through automation.
+- **Lab 01: Building and Deploying a Fabric-Integrated AI Application on Azure:**
 
-- **Lab 02: Working with the Data Foundation (Fabric + OneLake):** In this hands-on lab, participants will learn how data flows into the Lakehouse, explore SQL endpoints, create Dataflows Gen2, and work with the Fabric workspace deployed as part of the solution accelerator.
+   In this hands-on lab, participants will provision and configure Microsoft Fabric for Copilot and data agents, deploy Azure infrastructure using Bicep and Azure Developer CLI, set up application authentication, and validate an end-to-end solution by querying and visualizing data through natural language interactions.
+
+- **Lab 02: Creating Fabric Data Agent and Publish to Teams:**
+
+   In this hands-on lab, participants will learn how to create a Microsoft Fabric Data Agent connected to a Lakehouse, build and configure a custom AI agent in Microsoft Copilot Studio, integrate both agents, and publish the solution to Microsoft Teams to enable natural language, data-driven business insights.
 
 
 ## Prerequisites

@@ -204,6 +204,6 @@ In this task, you will create a custom AI agent in Microsoft Copilot Studio, con
 In this lab, you have completed:
 
 - Created and configured a Microsoft Fabric Data Agent
-- Created a new Copilot Studio agent
+- Implement and Validate an End-to-End Copilot Agent with Fabric Data Agent Integration
 
 ## You have successfully completed the lab.

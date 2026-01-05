@@ -155,9 +155,9 @@ In this task, you will create a new workspace in Microsoft Fabric to organize an
 
 ## Task 3: Deploy Azure infrastructure via the provided Bicep templates
 
-1. Navigate to the **Environment (1)** tab in the lab environment and click on the **Licenses (2)** button. Copy the **GitHubFabric UserEmail (3)** and **GitHubFabric Password (4)**, then save these credentials in **Notepad**. You will need them later during the GitHub login and device verification steps.
+1. Navigate to the **Environment (1)** tab in the lab environment and click on the **Licenses (2)** button. Copy the **GitHub UserName (3)** and **GitHub Password (4)**, then save these credentials in **Notepad**. You will need them later during the GitHub login and device verification steps.
 
-   ![](../Images/lab1-116.png)
+   ![](../Images/![](../Images/getting-started-5.png)
 
 1. Open a **Private window** in Microsoft Edge by clicking the three-dot menu **(1)** in the top-right and selecting **New InPrivate window (2)**.
 

@@ -29,6 +29,16 @@ Participants should have:
 - Basic knowledge of command-line tools, including Azure CLI and Azure Developer CLI (azd)
 - Familiarity with GitHub and GitHub Codespaces for source control and cloud-based development environments
 
+## Architecture
+
+This lab showcases an end-to-end agentic AI solution using **Microsoft Fabric** and **Copilot Studio** for conversational data insights. Enterprise data is stored in OneLake and exposed through a Fabric SQL Database, enabling a Fabric Data Agent for governed access. The agent is integrated with Copilot Studio to deliver insights via Microsoft Teams, while a custom agent backend using Azure App Service and Microsoft Agent Framework supports web-based interactions. This architecture demonstrates secure, scalable, multi-channel AI-driven analytics.
+
+## Architecture Diagram
+
+![](../Images/solution-architecture-cps.png)
+
+![](../Images/solution-architecture.png)
+
 ## Getting Started with the lab
 
 Welcome to your Chat with your data Fabric Workshop, Let's begin by making the most of this experience.

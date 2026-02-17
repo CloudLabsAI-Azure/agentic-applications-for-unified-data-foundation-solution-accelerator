@@ -10,6 +10,7 @@ Welcome to your Fueling AI and operational decision making with Fabric Real-Time
 
 Once you're ready to dive in, your **Guide** will be right at your fingertips within your web browser.
 
+![](../Images/fabric-image15.png)
 
 ## Lab Guide Zoom In/Zoom Out
 

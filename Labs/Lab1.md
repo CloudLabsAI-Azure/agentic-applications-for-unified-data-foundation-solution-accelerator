@@ -94,13 +94,21 @@ In this task, you will authenticate to GitHub and complete device verification, 
 
     ![](../Images/lab1-97.png)
 
-1. In a new browser tab, go to `https://www.github.com/login`.
+1. Open a new browser tab, paste the following URL into the address bar to access the GitHub login page, and press Enter to continue:
+
+   ```
+   https://www.github.com/login
+   ```
 
 1. Enter your **GitHub Username (1)** and **GitHub Password (1)** (as saved in Notepad) and click **Sign in (2)** to proceed.
 
     ![](../Images/lab1-9.png)
 
-1. Open a new tab in InPrivate window, then go to `http://outlook.office.com/`.
+1. Open a new browser tab, paste the following URL into the address bar to access the Outlook, and press Enter to continue:
+
+   ```
+   http://outlook.office.com/
+   ```
 
     ![](../Images/lab1-98.png)
 
@@ -128,9 +136,11 @@ In this task, you will authenticate to GitHub and complete device verification, 
 
      ![The `New Repository` creation form in GitHub.](../Images/lab1-100.png "New Repository Creation Form")
 
-1. Open the solution accelerator by copying the below link into new tab of edge browser and login using the same GitHub credentials used in previous task:
+1. Open the solution accelerator by copying the below link into new tab of edge browser and login using the same GitHub credentials used in the previous task:
 
-    [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/CloudLabsAI-Azure/agentic-applications-for-unified-data-foundation-solution-accelerator)
+   ```
+   https://github.com/codespaces/new/CloudLabsAI-Azure/agentic-applications-for-unified-data-foundation-solution-accelerator
+   ```
 
 1. Accept the default values on the create Codespaces page, choose **Create codespace**.
 

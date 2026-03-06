@@ -81,9 +81,11 @@ You can run this solution in VS Code Web. The button will open a web-based VS Co
     [![Open in Visual Studio Code Web](https://img.shields.io/static/v1?style=for-the-badge&label=Visual%20Studio%20Code%20(Web)&message=Open&color=blue&logo=visualstudiocode&logoColor=white)](https://vscode.dev/azure/?vscode-azure-exp=foundry&agentPayload=eyJiYXNlVXJsIjogImh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9taWNyb3NvZnQvYWdlbnRpYy1hcHBsaWNhdGlvbnMtZm9yLXVuaWZpZWQtZGF0YS1mb3VuZGF0aW9uLXNvbHV0aW9uLWFjY2VsZXJhdG9yL3JlZnMvaGVhZHMvbWFpbi9pbmZyYS92c2NvZGVfd2ViIiwgImluZGV4VXJsIjogIi9pbmRleC5qc29uIiwgInZhcmlhYmxlcyI6IHsiYWdlbnRJZCI6ICIiLCAiY29ubmVjdGlvblN0cmluZyI6ICIiLCAidGhyZWFkSWQiOiAiIiwgInVzZXJNZXNzYWdlIjogIiIsICJwbGF5Z3JvdW5kTmFtZSI6ICIiLCAibG9jYXRpb24iOiAiIiwgInN1YnNjcmlwdGlvbklkIjogIiIsICJyZXNvdXJjZUlkIjogIiIsICJwcm9qZWN0UmVzb3VyY2VJZCI6ICIiLCAiZW5kcG9pbnQiOiAiIn0sICJjb2RlUm91dGUiOiBbImFpLXByb2plY3RzLXNkayIsICJweXRob24iLCAiZGVmYXVsdC1henVyZS1hdXRoIiwgImVuZHBvaW50Il19)
 
 2. When prompted, sign in using your Microsoft account linked to your Azure subscription.
-3. Select the appropriate subscription to continue.
+    
+    Select the appropriate subscription to continue.
 
-4. Once the solution opens, the **AI Foundry terminal** will automatically start running the following command to install the required dependencies:
+3. Once the solution opens, the **AI Foundry terminal** will automatically start running the following command to install the required dependencies:
+
     ```shell
     sh install.sh
     ```
@@ -94,15 +96,8 @@ You can run this solution in VS Code Web. The button will open a web-based VS Co
     - Keep my existing files unchanged
     ```
     Choose “**Overwrite with versions from template**” and provide a unique environment name when prompted.
-
-5. **Authenticate with Azure** (VS Code Web requires device code authentication):
-   
-    ```shell
-    az login --use-device-code
-    ```
-    > **Note:** In VS Code Web environment, the regular `az login` command may fail. Use the `--use-device-code` flag to authenticate via device code flow. Follow the prompts in the terminal to complete authentication.
  
-6. Continue with the [deploying steps](#deploying-with-azd).
+4. Continue with the [deploying steps](#deploying-with-azd).
 
 
 </details>
@@ -205,26 +200,6 @@ Once you've opened the project in [Codespaces](#github-codespaces), [Dev Contain
     azd auth login --tenant-id <tenant-id>
     ```
 
-    > **Note**: This solution accelerator now supports two modes (standard and workshop). By default it will run in workshop mode. If you do not want to run the workshop please set IS_WORKSHOP run the below azd command to set the workshop to false. 
-
-      ```sh
-      azd env set IS_WORKSHOP false
-      ```
-    
-      In standard mode, by default the backend API is configured to Python.
-      To use dotnet instead, run the below command.
-
-      ```sh
-      azd env set BACKEND_RUNTIME_STACK dotnet
-      ```
-      
-      In standard mode, by default the use case is set to Retail Sales.
-      To switch to Insurance, run the below command.
-
-      ```sh
-      azd env set AZURE_ENV_USE_CASE Insurance-improve-customer-meetings
-      ```
-
 2. Provision and deploy all the resources:
 
     ```shell
@@ -233,12 +208,12 @@ Once you've opened the project in [Codespaces](#github-codespaces), [Dev Contain
 
 3. Provide an `azd` environment name (e.g., "daapp").
 4. Select a subscription from your Azure account and choose a location that has quota for all the resources.
-<!--5. Choose the programming language for the backend API:
+5. Choose the programming language for the backend API:
    - **Python**
    - **.NET (dotnet)**
 6. Choose the use case: 
    - **Retail-sales-analysis**
-   - **Insurance-improve-customer-meetings** -->
+   - **Insurance-improve-customer-meetings** 
 
    This deployment will take *7-10 minutes* to provision the resources in your account and set up the solution with sample data.
    

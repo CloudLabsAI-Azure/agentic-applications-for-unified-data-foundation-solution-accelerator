@@ -14,6 +14,7 @@ resource aiProject 'Microsoft.CognitiveServices/accounts/projects@2025-04-01-pre
 }
 
 
+
 // Outputs: AI Services Account
 output location string = aiServices.location
 output skuName string = aiServices.sku.name

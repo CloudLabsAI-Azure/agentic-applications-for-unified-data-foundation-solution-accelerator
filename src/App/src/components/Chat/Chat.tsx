@@ -37,7 +37,7 @@ import {
 import { ChatAdd24Regular } from "@fluentui/react-icons";
 import { generateUUIDv4 } from "../../configs/Utils";
 import ChatMessageComponent from "../ChatMessage/ChatMessage";
-import { getChatLandingText, isWorkShopDeployment } from "../../config";
+import { getChatLandingText } from "../../config";
 import {
   parseChartContent,
   isMalformedChartJSON,
@@ -91,7 +91,7 @@ const Chat: React.FC<ChatProps> = ({
     if (!convId || !newMessages.length) {
       return;
     }
-    const isNewConversation = !selectedConversationId;
+    const isNewConversation = reqType !== 'graph' ? !selectedConversationId : false;
 
     if (false) {  // Disabled: chart display default
       setIsChartLoading(true);
@@ -462,18 +462,8 @@ const Chat: React.FC<ChatProps> = ({
           updatedMessages = [newMessage, errorMessage];
         } else if (isChartQuery(userMessage)) {
           try {
-            // Workshop mode: single complete response chunk — parse directly
-            // Non-workshop mode: multiple streaming chunks concatenated — split and take last segment
-            let chartTextToParse: string;
-            if (isWorkShopDeployment()) {
-              chartTextToParse = runningText;
-            } else {
-              const splitRunningText = runningText.split("}{");
-              chartTextToParse = splitRunningText.length > 1
-                ? "{" + splitRunningText[splitRunningText.length - 1]
-                : splitRunningText[0];
-            }
-            const parsedChartResponse = JSON.parse(chartTextToParse);
+            const splitRunningText = runningText.split("}{");
+            const parsedChartResponse = JSON.parse("{" + splitRunningText[splitRunningText.length - 1]);
             
             const rawChartContent = parsedChartResponse?.choices[0]?.messages[0]?.content;
             
@@ -518,15 +508,12 @@ const Chat: React.FC<ChatProps> = ({
           } catch {
             // Error parsing chart response
           }
-        }
-        
-        // If no messages have been added yet but we have streamed content, save it
-        if (updatedMessages.length === 0 && streamMessage.content) {
+        } else if (!isChartResponseReceived) {
           updatedMessages = [newMessage, streamMessage];
         }
       }
       
-      if (updatedMessages.length > 0) {
+      if (updatedMessages.length > 0 && updatedMessages[updatedMessages.length - 1]?.role !== ERROR) {
         saveToDB(updatedMessages, conversationId, isChatReq);
       }
     } catch (e) {

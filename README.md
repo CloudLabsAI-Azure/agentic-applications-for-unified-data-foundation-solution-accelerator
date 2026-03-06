@@ -73,8 +73,6 @@ For Azure Deployment: [Click here to launch the deployment guide](./documents/De
 For Local Development: 
 - [Local Development Setup Guide](./documents/LocalDevelopmentSetup.md) - Comprehensive setup instructions for Windows and Linux.
 - Includes native Windows setup, WSL2 configuration, and cross-platform development tools
-
-For Workshop: [Workshop Guide](https://microsoft.github.io/agentic-applications-for-unified-data-foundation-solution-accelerator/deployment-guide-optionA/) - A hands-on, step-by-step walkthrough for building AI agents that combine unstructured document knowledge with structured enterprise data.
 <br/><br/>
 
 
@@ -197,15 +195,6 @@ Check out similar solution accelerators
 
 <br/>
 
-
-💡 Want to get familiar with Microsoft's AI and Data Engineering best practices? Check out our playbooks to learn more
-
-| Playbook | Description |
-|:---|:---|
-| [AI&nbsp;playbook](https://learn.microsoft.com/en-us/ai/playbook/) | The Artificial Intelligence (AI) Playbook provides enterprise software engineers with solutions, capabilities, and code developed to solve real-world AI problems. |
-| [Data&nbsp;playbook](https://learn.microsoft.com/en-us/data-engineering/playbook/understanding-data-playbook) | The data playbook provides enterprise software engineers with solutions which contain code developed to solve real-world problems. Everything in the playbook is developed with, and validated by, some of Microsoft's largest and most influential customers and partners. |
-
-<br/> 
 
 ## Provide feedback
 

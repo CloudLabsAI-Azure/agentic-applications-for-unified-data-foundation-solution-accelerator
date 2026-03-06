@@ -15,15 +15,13 @@ class HomePage(BasePage):
     """Page object class for Home Page interactions and validations."""
     # ---------- LOCATORS ----------
     HOME_PAGE_TEXT = "//span[normalize-space()='Start Chatting']"
-    HOME_PAGE_SUBTEXT_RETAIL = "//span[.='You can ask questions around sales, products and orders.']"
-    HOME_PAGE_SUBTEXT_INSURANCE = "//span[contains(.,'You can ask questions around customer policies, claims and communications.')]"
-    HOME_PAGE_SUBTEXT = HOME_PAGE_SUBTEXT_RETAIL  # Default to retail
+    HOME_PAGE_SUBTEXT = "//span[.='You can ask questions around sales, products and orders.']"
     SHOW_CHAT_HISTORY_BUTTON = "//button[normalize-space()='Show Chat History']"
     HIDE_CHAT_HISTORY_BUTTON = "//button[normalize-space()='Hide Chat History']"
 
     # Updated menu & clear chat locators
     THREE_DOT_MENU = "//i[@data-icon-name='More']"
-    CLEAR_CHAT_BUTTON = "//span[.='Clear all chat history']"
+    CLEAR_CHAT_BUTTON = "//i[@data-icon-name='Delete']"
     CLEARALL_BUTTON = "//span[contains(text(),'Clear All')]"
 
     NO_CHAT_HISTORY_TEXT = "//span[contains(text(),'No chat history.')]"
@@ -46,14 +44,10 @@ class HomePage(BasePage):
         super().__init__(page)
         self.page = page
 
-    def validate_home_page(self, use_case="retail"):
-        """
-        Validate that the home page elements are visible.
-        
-        Args:
-            use_case: Either 'retail' or 'insurance' to validate appropriate subtext (default: 'retail')
-        """
-        logger.info(f"Starting home page validation for {use_case} use case...")
+    def validate_home_page(self):
+
+        """Validate that the home page elements are visible."""
+        logger.info("Starting home page validation...")
         logger.info("Validating HOME_PAGE_TEXT is visible...")
         expect(self.page.locator(self.HOME_PAGE_TEXT)).to_be_visible()
         self.page.wait_for_timeout(4000)
@@ -248,14 +242,8 @@ class HomePage(BasePage):
 
         raise AssertionError(f"Failed to get valid response after {max_retries} attempts")
 
-    def ask_questions_from_json(self, json_file_path, use_case="retail"):
-        """
-        Ask questions from JSON file one by one with validation and retry.
-        
-        Args:
-            json_file_path: Path to the JSON file containing questions
-            use_case: Either 'retail' or 'insurance' (default: 'retail')
-        """
+    def ask_questions_from_json(self, json_file_path):
+        """Ask questions from JSON file one by one with validation and retry."""
         logger.info(f"Loading questions from: {json_file_path}")
 
         # Load questions from JSON
@@ -283,75 +271,38 @@ class HomePage(BasePage):
             logger.info(f"Processing Question {idx} of {len(questions)}")
             logger.info("=" * 80)
 
-            # Retry logic at question level - try each question up to 2 times
-            question_retry_count = 2
-            question_success = False
-            last_error = None
+            try:
+                response = self.ask_question_with_retry(question)
+                results.append({
+                    'question_number': idx,
+                    'question': question,
+                    'status': 'PASSED',
+                    'response': response[:200]
+                })
+                logger.info(f"✓ Question {idx} completed")
+                self.page.wait_for_timeout(3000)
 
-            for question_attempt in range(1, question_retry_count + 1):
-                try:
-                    if question_attempt > 1:
-                        logger.info(f"🔄 Retrying Question {idx} (Attempt {question_attempt} of {question_retry_count})")
-                        # Start fresh conversation before retry
-                        try:
-                            new_chat_btn = self.page.locator(self.NEW_CHAT_BUTTON)
-                            if new_chat_btn.count() > 0:
-                                new_chat_btn.click()
-                                self.page.wait_for_timeout(3000)
-                                logger.info("✓ Started new chat for question retry")
-                        except Exception:
-                            pass
-
-                    response = self.ask_question_with_retry(question)
-                    results.append({
-                        'question_number': idx,
-                        'question': question,
-                        'status': 'PASSED',
-                        'response': response[:200],
-                        'attempts': question_attempt
-                    })
-                    logger.info(f"✓ Question {idx} completed successfully on attempt {question_attempt}")
-                    question_success = True
-                    self.page.wait_for_timeout(3000)
-                    break  # Success, move to next question
-
-                except AssertionError as e:
-                    last_error = e
-                    logger.warning(f"⚠️ Question {idx} failed on attempt {question_attempt}: {str(e)}")
-                    if question_attempt < question_retry_count:
-                        logger.info(f"Will retry question {idx}... ({question_retry_count - question_attempt} question-level retries remaining)")
-                        self.page.wait_for_timeout(5000)
-                    else:
-                        logger.error(f"❌ Question {idx} failed after {question_retry_count} attempts")
-
-            # If question failed after all retries, record failure and raise
-            if not question_success:
+            except AssertionError as e:
                 results.append({
                     'question_number': idx,
                     'question': question,
                     'status': 'FAILED',
-                    'error': str(last_error),
-                    'attempts': question_retry_count
+                    'error': str(e)
                 })
-                logger.error(f"❌ Question {idx} FAILED after all retry attempts")
-                raise last_error
+                logger.error(f"❌ Question {idx} failed: {str(e)}")
+                raise
 
         logger.info("=" * 80)
         logger.info("All questions processed successfully!")
         logger.info("=" * 80)
 
         # Click new conversation at the end
-        self.click_new_conversation(use_case=use_case)
+        self.click_new_conversation()
 
         return results
 
-    def click_new_conversation(self, use_case="retail"):
-        """
-        Click on 'Create new Conversation' button to start a fresh chat session and validate home page elements.
-        
-        Args:
-            use_case: Either 'retail' or 'insurance' to validate appropriate subtext (default: 'retail')
-        """
+    def click_new_conversation(self):
+        """Click on 'Create new Conversation' button to start a fresh chat session and validate home page elements."""
         logger.info("Clicking on 'Create new Conversation' button...")
         try:
             new_chat_btn = self.page.locator(self.NEW_CHAT_BUTTON)
@@ -365,10 +316,9 @@ class HomePage(BasePage):
                 expect(self.page.locator(self.HOME_PAGE_TEXT)).to_be_visible(timeout=10000)
                 logger.info("✓ HOME_PAGE_TEXT is visible")
 
-                # Validate HOME_PAGE_SUBTEXT is visible based on use case
-                subtext_locator = self.HOME_PAGE_SUBTEXT_INSURANCE if use_case.lower() == "insurance" else self.HOME_PAGE_SUBTEXT_RETAIL
-                logger.info(f"Validating HOME_PAGE_SUBTEXT is visible for {use_case}...")
-                expect(self.page.locator(subtext_locator)).to_be_visible(timeout=10000)
+                # Validate HOME_PAGE_SUBTEXT is visible
+                logger.info("Validating HOME_PAGE_SUBTEXT is visible...")
+                expect(self.page.locator(self.HOME_PAGE_SUBTEXT)).to_be_visible(timeout=10000)
                 logger.info("✓ HOME_PAGE_SUBTEXT is visible")
 
                 logger.info("✓ New conversation started successfully with home page elements validated")
@@ -451,13 +401,8 @@ class HomePage(BasePage):
             logger.error(f"❌ {error_msg}")
             raise AssertionError(error_msg) from e
 
-    def ask_greeting_prompts_and_validate(self, use_case="retail"):
-        """
-        Ask greeting prompts from constants and validate responses.
-        
-        Args:
-            use_case: Either 'retail' or 'insurance' (default: 'retail')
-        """
+    def ask_greeting_prompts_and_validate(self):
+        """Ask greeting prompts from constants and validate responses."""
         logger.info("=" * 80)
         logger.info("Starting Greeting Prompts Validation")
         logger.info("=" * 80)
@@ -502,17 +447,12 @@ class HomePage(BasePage):
         logger.info("=" * 80)
 
         # Click new conversation at the end
-        self.click_new_conversation(use_case=use_case)
+        self.click_new_conversation()
 
         return results
 
-    def ask_rai_prompt_and_validate(self, use_case="retail"):
-        """
-        Ask RAI prompt and validate that response contains 'I cannot assist with that.'.
-        
-        Args:
-            use_case: Either 'retail' or 'insurance' (default: 'retail')
-        """
+    def ask_rai_prompt_and_validate(self):
+        """Ask RAI prompt and validate that response contains 'I cannot assist with that.'."""
         logger.info("=" * 80)
         logger.info("Starting RAI Prompt Validation")
         logger.info("=" * 80)
@@ -553,19 +493,17 @@ class HomePage(BasePage):
             logger.info(f"Response received: {response_text}")
 
             # Validate that response contains the expected RAI message
-            expected_messages = ["I cannot", "I can not"]
-            response_lower = response_text.lower()
-            if any(msg.lower() in response_lower for msg in expected_messages):
-                matched_msg = next(msg for msg in expected_messages if msg.lower() in response_lower)
-                logger.info(f"✓ RAI validation passed - Response contains: '{matched_msg}'")
+            expected_message = "I cannot"
+            if expected_message.lower() in response_text.lower():
+                logger.info(f"✓ RAI validation passed - Response contains: '{expected_message}'")
                 result = {
                     'prompt': RAI_PROMPT,
                     'status': 'PASSED',
                     'response': response_text,
-                    'validation': f"Response correctly contains '{matched_msg}'"
+                    'validation': f"Response correctly contains '{expected_message}'"
                 }
             else:
-                error_msg = f"RAI validation failed - Expected response to contain '{' or '.join(expected_messages)}' but got: {response_text}"
+                error_msg = f"RAI validation failed - Expected response to contain '{expected_message}' but got: {response_text}"
                 logger.error(f"❌ {error_msg}")
                 raise AssertionError(error_msg)
 
@@ -574,7 +512,7 @@ class HomePage(BasePage):
             logger.info("=" * 80)
 
             # Click new conversation at the end
-            self.click_new_conversation(use_case=use_case)
+            self.click_new_conversation()
 
             return result
 
@@ -585,13 +523,8 @@ class HomePage(BasePage):
             logger.error(f"❌ {error_msg}")
             raise AssertionError(error_msg) from e
 
-    def ask_out_of_scope_prompt_and_validate(self, use_case="retail"):
-        """
-        Ask out of scope prompt and validate that response contains 'I cannot'.
-        
-        Args:
-            use_case: Either 'retail' or 'insurance' (default: 'retail')
-        """
+    def ask_out_of_scope_prompt_and_validate(self):
+        """Ask out of scope prompt and validate that response contains 'I cannot'."""
         logger.info("=" * 80)
         logger.info("Starting Out of Scope Prompt Validation")
         logger.info("=" * 80)
@@ -651,7 +584,7 @@ class HomePage(BasePage):
             logger.info("=" * 80)
 
             # Click new conversation at the end
-            self.click_new_conversation(use_case=use_case)
+            self.click_new_conversation()
 
             return result
 
@@ -800,7 +733,7 @@ class HomePage(BasePage):
             update_check_icon = self.page.locator(self.UPDATE_CHECK_ICON).first
             expect(update_check_icon).to_be_visible(timeout=10000)
             update_check_icon.click()
-            self.page.wait_for_timeout(10000)
+            self.page.wait_for_timeout(3000)
             logger.info("✓ Update check icon clicked")
 
             # Step 6: Validate that the text is updated

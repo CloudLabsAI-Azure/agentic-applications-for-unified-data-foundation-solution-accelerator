@@ -12,18 +12,11 @@ import {
   CosmosDBStatus,
 } from "../types/AppTypes";
 import { ApiErrorHandler } from "../utils/errorHandler";
-import { getApiBaseUrl, isWorkShopDeployment } from "../config";
+import { getApiBaseUrl } from "../config";
 import { httpClient } from "../utils/httpClient";
 import { getUserId, setUserId, createErrorResponse } from "../utils/apiUtils";
 
 const baseURL = getApiBaseUrl(); // base API URL
-
-// Get history base path based on deployment mode
-function getHistoryBasePath(): string {
-  const isWorkshop = isWorkShopDeployment();
-  const basePath = isWorkshop ? '/history' : '/historyfab';
-  return basePath;
-}
 
 // Initialize HTTP client with base URL
 httpClient.setBaseURL(baseURL);
@@ -68,7 +61,7 @@ export async function getUserInfo(): Promise<UserInfo[]> {
 }
 
 export const historyRead = async (convId: string): Promise<ChatMessage[]> => {
-  const endpoint = `${getHistoryBasePath()}/read`;
+  const endpoint = `/historyfab/read`;
   
   try {
     const response = await httpClient.get(endpoint, {
@@ -117,7 +110,7 @@ export const historyList = async (
   offset = 0,
   limit = 25
 ): Promise<Conversation[] | null> => {
-  const endpoint = `${getHistoryBasePath()}/list`;
+  const endpoint = `/historyfab/list`;
   
   try {
     const response = await httpClient.get(endpoint, {
@@ -178,7 +171,7 @@ export const historyUpdate = async (
   newMessages: ChatMessage[],
   convId: string
 ): Promise<Response> => {
-  const endpoint = `${getHistoryBasePath()}/update`;
+  const endpoint = `/historyfab/update`;
   
   try {
     const response = await httpClient.post(endpoint, {
@@ -235,7 +228,7 @@ export const historyRename = async (
   convId: string,
   title: string
 ): Promise<Response> => {
-  const endpoint = `${getHistoryBasePath()}/rename`;
+  const endpoint = `/historyfab/rename`;
   
   try {
     const response = await httpClient.post(endpoint, {
@@ -252,7 +245,7 @@ export const historyRename = async (
 };
 
 export const historyDelete = async (convId: string): Promise<Response> => {
-  const endpoint = `${getHistoryBasePath()}/delete`;
+  const endpoint = `/historyfab/delete`;
   
   try {
     const response = await httpClient.delete(endpoint, {
@@ -268,7 +261,7 @@ export const historyDelete = async (convId: string): Promise<Response> => {
 };
 
 export const historyDeleteAll = async (): Promise<Response> => {
-  const endpoint = `${getHistoryBasePath()}/delete_all`;
+  const endpoint = `/historyfab/delete_all`;
   
   try {
     const response = await httpClient.delete(endpoint, {

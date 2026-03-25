@@ -13,14 +13,16 @@ You will be able to complete the following tasks:
 - Task 1: Create and Configure a Microsoft Fabric Data Agent
 - Task 2: Implement and Validate an End-to-End Copilot Agent with Fabric Data Agent Integration
 
+> [!IMPORTANT]
+> Kindly use your personal system to complete the lab for the time being, as not all features are currently available in the Copilot Studio web application on the virtual machine.
 
 ## Task 1: Create and Configure a Microsoft Fabric Data Agent
 
 In this task, you will create and publish a Microsoft Fabric Data Agent within an existing Fabric workspace. You will connect the agent to a Lakehouse data source, select the required tables, add a descriptive prompt, and publish the agent so it can answer natural language questions based on the connected data.
 
-1. To create a new Fabric data agent, first navigate to **fabric<inject key="DeploymentID" enableCopy="false"/> (1)** workspace created in previous lab, and then select the **+ New Item (2)** button. In the **All items** tab, search for **data agent (3)** to locate the appropriate option, then choose **Data agent (preview) (4)**
+1. To create a new Fabric data agent, first navigate to **fabric<inject key="DeploymentID" enableCopy="false"/> (1)** workspace created in previous lab, and then select the **+ New Item (2)** button. In the **All items** tab, search for **data agent (3)** to locate the appropriate option, then choose **Data agent (4)**
 
-    ![quota-check-output](../Images/lab1-47.png)
+    ![quota-check-output](../Images/march-update-lab1-5.png)
 
 1. Provide **fabric-agent** name for your Fabric data agent and click on **Create** button.
 
@@ -79,12 +81,11 @@ In this task, you will create a custom AI agent in Microsoft Copilot Studio, con
     | --- | --- |
     | Name  | **Adventure Work Sales Agent (1)** |
     | Description | **Adventure Work Sales Agent is a custom agent built in Microsoft Copilot Studio and is designed to answer business questions about customers and product sales (2)** |
+    | Select your agent's model | **GPT-5 Chat (2)** |
 
-    ![quota-check-output](../Images/jan2026-chat-fabric-14.png)
+    ![quota-check-output](../Images/march-update-lab1-9.png)
 
 1. You may see the prompt in the screen, **Setting up your copilot may take a while**, wait for sometime till your agent gets created.
-
-    ![quota-check-output](../Images/lab2-11.png)
 
 1. To add a Fabric data agent to your custom AI agent in Copilot Studio, choose **Adventure Work Sales Agent** created previously then navigate to **Agents (1)** from the top pane and then select **+ Add (2)** to add agents to your custom AI agent.
 
@@ -134,9 +135,9 @@ In this task, you will create a custom AI agent in Microsoft Copilot Studio, con
 
     ![quota-check-output](../Images/lab2-19.png)
 
-1. Scroll down to the **Knowledge** section and turn off **Use general knowledge (1)** then choose **Save (2)**.
+1. Scroll down to the **Knowledge** section and turn off **Use general knowledge (1)** and **Use information from the web (2)** then choose **Save (3)**.
 
-    ![quota-check-output](../Images/lab2-20.png)
+    ![quota-check-output](../Images/march-update-lab1-6.png)
 
 1. Use the **Test (1)** chat pane available on the right-hand side to interact with the agent by asking sample questions. Click on **Allow (2)** in Fabric data agent after first interaction to the agent.
 
@@ -150,13 +151,13 @@ In this task, you will create a custom AI agent in Microsoft Copilot Studio, con
 
     ![quota-check-output](../Images/lab2-21.png)
 
-1. Next, go to **Channels (1)** and choose the appropriate consumption channel. To publish the agent to Teams, select **Teams and Microsoft 365 Copilot (2)** from the available channel options.
+1. Next, go to **Channels (1)** and choose the appropriate consumption channel. To publish the agent to Teams, select **Microsoft 365 Copilot and Microsoft Teams (2)** from the available channel options.
 
-    ![quota-check-output](../Images/lab2-24.png)
+    ![quota-check-output](../Images/march-update-lab1-7.png)
 
 1. This opens the **Teams and Microsoft 365 Copilot** window. Select **Add channel** to enable and configure this channel.
 
-    ![quota-check-output](../Images/lab2-31.png)
+    ![quota-check-output](../Images/march-update-lab1-8.png)
 
 1. After completing the setup, you will see the **The channel was added** message at the top, and the **See agent in Teams** option will become active. Select **See agent in Teams** to open the agent in Microsoft Teams.
 

@@ -15,6 +15,9 @@ You will be able to complete the following tasks:
 - Task 3: Set Up Authentication in Azure App Service
 - Task 4: Testing the application
 
+> [!IMPORTANT]
+> Kindly use your personal system to complete the lab for the time being, as not all features are currently available in the Copilot Studio web application on the virtual machine.
+
 ## Task 1: Create a workspace and link with Fabric Copilot-enabled capacity
 
 In this task, you will create a new workspace in Microsoft Fabric to organize and manage your data and analytics assets. The workspace will be linked to a Copilot-enabled capacity, providing access to AI-powered features such as natural language queries and intelligent data insights.
@@ -71,7 +74,7 @@ In this task, you will create a new workspace in Microsoft Fabric to organize an
 
     >**Note:** Close any pop-up that appears on the screen.
 
-     ![](../Images/lab1-7.png)
+     ![](../Images/march-update-lab1-4.png)
 
 1. Retrieve **Workspace ID** from URL for future steps.
 

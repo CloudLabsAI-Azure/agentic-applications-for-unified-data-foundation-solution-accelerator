@@ -100,7 +100,9 @@ Feel free to **Start, Stop, or Restart (2)** your virtual machine as needed from
 
    ![Stay Signed in](../Images/03.png)   
 
-1. If you see the pop-up **You have free Azure Advisor recommendations!**, close the window to continue the lab.  
+1. If the **Welcome to Microsoft Teams!** window appears, close it to proceed.
+
+   ![Stay Signed in](../Images/march-update-lab1-13.png)
 
 ## Support Contact
 

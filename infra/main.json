@@ -61,7 +61,7 @@
     },
     "secondaryLocation": {
       "type": "string",
-      "defaultValue": "eastus2",
+      "defaultValue": "westcentralus",
       "minLength": 1,
       "metadata": {
         "description": "Secondary location for databases creation(example:eastus2):"

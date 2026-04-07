@@ -205,7 +205,7 @@ In this task, you will authenticate to GitHub and complete device verification, 
 
 1. You will see the subscription available for you, **type 1** choose **Enter** to select the default subscription.
 
-1. Now, you will see the list of locations, use the up/down arrow button to navigate to **West Central US** as location, press **Enter** to select it.
+1. Now, you will see the list of locations, use the up/down arrow button to navigate to **East US 2** as location, press **Enter** to select it.
 
 1. You will see two options to choose the programming language for the backend API, as **Enter a value for the 'backendRuntimeStack' infrastructure parameter:**, choose **dotnet** and press **Enter**.
 
@@ -219,7 +219,7 @@ In this task, you will authenticate to GitHub and complete device verification, 
 
 1. Now, you will see the option to choose the Resource group or create it, keep the cursor at **1. Create a new resource group** and press **Enter**.
 
-1. Use the up/down arrow button to navigate to **West Central US** as location, press **Enter** to select it.
+1. Use the up/down arrow button to navigate to **East US 2** as location, press **Enter** to select it.
 
 1. You will see the prompt **Enter a name for the new resource group**, provide **rg-fabricapp** as suggested and press **Enter**
 

@@ -100,7 +100,7 @@ In this task, you will authenticate to GitHub and complete device verification, 
    https://www.github.com/login
    ```
 
-1. Enter your **GitHub Username (1)** and **GitHub Password (1)** (as saved in Notepad) and click **Sign in (2)** to proceed.
+1. Enter your **GitHub Username (1)** and **GitHub Password (1)** (as saved in Notepad) and click **Sign in (2)** to proceed. You will be prompted to enter a verification code. Please follow the next steps to retrieve the verification code.
 
     ![](../Images/lab1-9.png)
 
@@ -236,7 +236,6 @@ In this task, you will authenticate to GitHub and complete device verification, 
     rm -rf .azure
     ```
     
-
 1. Once the deployment has completed successfully:
 
     - Copy the **two bash commands (2)** from the terminal (ex. 

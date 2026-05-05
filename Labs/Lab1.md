@@ -223,11 +223,7 @@ In this task, you will authenticate to GitHub and complete device verification, 
 
 1. You will see the prompt **Enter a name for the new resource group**, provide **rg-fabricapp** as suggested and press **Enter**
 
-    ![](../Images/lab1-25.png)
-
 1. This deployment can take upto **7-10 minutes** to provision the resources in your account and set up the solution with sample data.
-
-    ![](../Images/lab1-26.png)
 
     > **Note:** If you encounter an error or timeout during deployment, changing the location may help, as there could be availability constraints for the resources.
     Execute the command below to clear the saved session data, then try using any of the other regions listed below. Here are some example regions where the services are available: **East US2, Australia East, UK South, France Central.**
